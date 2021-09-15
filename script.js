@@ -70,6 +70,7 @@ window.onkeydown = (event) => {
   let code = event.keyCode;
   if (code === 38 || code === 40) event.preventDefault();
 };
+
 /* end */
 function createMatrix(collections) {
   let collectionLength = collections.length,
