@@ -1,0 +1,101 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+}
+
+/* -----------------------navbar----------------------- */
+nav {
+    width: 60px;
+    height: 100vh;
+    border-right: 1px solid #f1f1f125;
+    box-sizing: border-box;
+}
+
+nav ul {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0.85rem 0;
+    cursor: pointer;
+}
+
+#light-mode {
+    display: none;
+}
+
+/* -----------------------end----------------------- */
+
+/* -----------------------main----------------------- */
+main {
+    width: calc(100vw - 60px);
+}
+
+/* ------movie-info------ */
+#movie-info {
+    background: center / cover no-repeat url("https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXq_vQJf0hxGmUQqHnb8nXwpz8iEmzC2upISv1MYxfE2kXO-IouDyL-TuAAkSqEn-iPui5s3ax8In2XqquIQkQ7L7csL.jpg?r=a42");
+    height: 63vh;
+    min-height: 250px;
+    position: relative;
+    align-items: center;
+}
+
+#fade {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #000 -30%, #fff0);
+    position: absolute;
+    z-index: auto;
+}
+
+#about-movie {
+    position: relative;
+    z-index: 1;
+    margin-left: 5%;
+}
+
+#about-movie h2 {
+    font-size: 3.5rem;
+}
+
+#about-movie p {
+    width: 260px;
+    margin: 0.2rem 0 1rem 0;
+    font-size: 1.1rem;
+    line-height: 1.15rem;
+}
+
+#buttons button {
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+}
+
+#play {
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    background-color: #f1f1f1;
+}
+
+#more-info {
+    background-color: #605e61;
+    color: #fff;
+}
+
+/* ------end------ */
+
+/* -----------------------end----------------------- */
+.flex {
+    display: flex;
+}
