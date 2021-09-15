@@ -1,6 +1,7 @@
 body {
     background-color: #000;
     color: #fff;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 button {
@@ -64,7 +65,8 @@ main {
 }
 
 #about-movie h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
+    font-family: 'Kodchasan', sans-serif;
 }
 
 #about-movie p {

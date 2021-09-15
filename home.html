@@ -5,7 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Netflix | Films and movies hub</title>
+    <link rel="stylesheet" href="./css-reset.css" />
     <link rel="stylesheet" href="style.css" />
+    <!-- Kodchasan font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kodchasan:ital,wght@1,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ubuntu font cdn -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <!-- end -->
   </head>
   <body class="flex">
     <nav>
@@ -55,7 +71,7 @@
       </ul>
     </nav>
     <main>
-      <div id="movie-info">
+      <div id="movie-info" class="flex">
         <div id="fade"></div>
         <section id="about-movie">
           <h2>STRANGER <br />THINGS</h2>
@@ -64,8 +80,8 @@
             secret experiments, terrifying supernatural forces nad a strange
             little girl.
           </p>
-          <section id="button">
-            <button id="play">
+          <section id="buttons" class="flex">
+            <button id="play" class="flex">
               <img
                 src="https://img.icons8.com/material-rounded/24/000000/play--v1.png"
                 alt="Play icon"
