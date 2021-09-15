@@ -13,7 +13,7 @@ li {
     cursor: pointer;
 }
 
-* {
+* :not(li) {
     transition: cubic-bezier(0.51, -0.03, 0.29, 1.01) 800ms;
 }
 
@@ -146,6 +146,8 @@ main {
 .collection li {
     width: calc(98% / 6);
     height: 21vw;
+    transition: 200ms;
+    z-index: auto;
 }
 
 .collection li img {
