@@ -66,7 +66,10 @@ main {
 
 #about-movie h2 {
     font-size: 4rem;
-    font-family: 'Kodchasan', sans-serif;
+    font-weight: bolder;
+    letter-spacing: -0.1rem;
+    line-height: 2.9rem;
+    font-family: 'Architects Daughter', cursive;
 }
 
 #about-movie p {
