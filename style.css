@@ -45,7 +45,7 @@ main {
 #movie-info {
     background: center / cover no-repeat url("https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXq_vQJf0hxGmUQqHnb8nXwpz8iEmzC2upISv1MYxfE2kXO-IouDyL-TuAAkSqEn-iPui5s3ax8In2XqquIQkQ7L7csL.jpg?r=a42");
     height: 63vh;
-    min-height: 250px;
+    min-height: 300px;
     position: relative;
     align-items: center;
 }
@@ -62,6 +62,7 @@ main {
     position: relative;
     z-index: 1;
     margin-left: 5%;
+    margin-bottom: 3.5rem;
 }
 
 #about-movie h2 {
@@ -100,6 +101,39 @@ main {
 
 /* ------end------ */
 
+/* ------categories------ */
+
+#categories {
+    position: relative;
+    bottom: 10vh;
+}
+
+.collection {
+    margin: 0 2% 2%;
+}
+
+.collection h3 {
+    font-size: 1.3rem;
+}
+
+.collection ul {
+    width: 100%;
+    margin-top: 0.5rem;
+    justify-content: space-between;
+}
+
+.collection li {
+    width: calc(98% / 6);
+    height: 21vw;
+}
+
+.collection li img {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ------end------ */
 /* -----------------------end----------------------- */
 .flex {
     display: flex;
