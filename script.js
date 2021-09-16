@@ -1,5 +1,6 @@
 const collections = document.querySelectorAll(".collection");
 const moviesMatrix = createMatrix(collections);
+const categories = document.querySelector("#categories");
 const audio = new Audio(
   "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
 );
@@ -14,6 +15,7 @@ moviesMatrix.forEach((arr) => {
 });
 function increaseScale() {
   let elementStyle = this.style;
+  scaledElement.style.transform = "scale(1)";
   elementStyle.transform = "scale(1.1)";
   elementStyle.zIndex = "1";
 }
@@ -51,6 +53,14 @@ function moveBetweenMovies() {
     audio.play();
     setTimeout(() => audio.load(), 500);
   }
+  backdropBlur(10, "0", "13vh");
+  if (code === 27) {
+    backdropBlur(0, "80%", "0");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
   if (row > 3) row = 0;
   if (row < 0) row = 3;
   if (column > 5) column = 0;
@@ -72,6 +82,12 @@ window.onkeydown = (event) => {
 };
 
 /* end */
+function backdropBlur(blurLevel, top, padding) {
+  categories.style.backdropFilter = `blur(${blurLevel}px)`;
+  categories.style.top = top;
+  categories.style.padding = padding + " 0 1rem";
+}
+
 function createMatrix(collections) {
   let collectionLength = collections.length,
     arrTemp = [],

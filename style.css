@@ -13,15 +13,17 @@ li {
     cursor: pointer;
 }
 
-* :not(li) {
-    transition: cubic-bezier(0.51, -0.03, 0.29, 1.01) 800ms;
+*:not(li) {
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 800ms;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* -----------------------navbar----------------------- */
 aside {
     width: 60px;
-    border-right: 1px solid #f1f1f125;
-    box-sizing: border-box;
 }
 
 nav {
@@ -30,6 +32,9 @@ nav {
     position: fixed;
     justify-content: center;
     align-items: center;
+    border-right: 1px solid #f1f1f125;
+    box-sizing: border-box;
+    z-index: 3;
 }
 
 nav ul {
@@ -60,6 +65,7 @@ nav ul li:hover {
 /* -----------------------main----------------------- */
 main {
     width: calc(100vw - 60px);
+    position: relative;
 }
 
 /* ------movie-info------ */
@@ -125,16 +131,20 @@ main {
 /* ------categories------ */
 
 #categories {
-    position: relative;
-    bottom: 10vh;
+    position: absolute;
+    width: 100%;
+    top: 80%;
+    z-index: 2;
+    backdrop-filter: blur(0px);
+    transition: 500ms ease;
 }
 
 .collection {
-    margin: 0 2% 2%;
+    margin: 0 2rem 2rem;
 }
 
 .collection h3 {
-    font-size: 1.3rem;
+    font-size: 1.7rem;
 }
 
 .collection ul {
