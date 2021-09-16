@@ -4,16 +4,18 @@ const categories = document.querySelector("#categories");
 const closeBtn = document.querySelector("#close");
 const header = document.querySelector("header");
 const htmlTag = document.querySelector("html");
+const webpageMode = document.querySelector("#mode");
 const audio = new Audio(
   "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
 );
 audio.volume = 0.1;
 
 /* Scroll handler */
+let headerColor = "#000";
 window.addEventListener("scroll", () => {
   let top = htmlTag.scrollTop;
   if (top < 70) header.style.background = "#0000";
-  else header.style.background = "#000";
+  else header.style.background = headerColor;
 });
 
 /* Mouse listener */
@@ -86,6 +88,40 @@ window.onkeydown = (event) => {
   let code = event.keyCode;
   if (code === 38 || code === 40) event.preventDefault();
 };
+
+/* change web mode to dark or light */
+const lightMode = webpageMode.children[1],
+  darkMode = webpageMode.children[0],
+  nav = document.querySelector("aside nav"),
+  navIcons = document.querySelectorAll("aside li img"),
+  fade = document.querySelector("#fade"),
+  play = document.querySelector("#play");
+let isDarkMode = true;
+
+webpageMode.addEventListener("click", () => {
+  if (isDarkMode) {
+    syncColor("none", "inline-block", "#000000", "#ffffff", 0, "#017eff");
+    isDarkMode = false;
+  } else {
+    syncColor("inline-block", "none", "#ffffff", "#000000", 100, "#f1f1f1");
+    isDarkMode = true;
+  }
+});
+
+function syncColor(dDisplay, lDisplay, from, to, brightness, btnColor) {
+  darkMode.style.display = dDisplay;
+  lightMode.style.display = lDisplay;
+  document.body.style.background = to;
+  document.body.style.color = from;
+  navIcons.forEach(
+    (value) => (value.style.filter = `brightness(${brightness})`)
+  );
+  nav.style.borderRight = `1px solid ${from}25`;
+  fade.style.background = `linear-gradient(90deg, ${to}, #fff0)`;
+  play.style.background = btnColor;
+  headerColor = to;
+  closeBtn.style.color = "#fff";
+}
 
 /* end */
 function backdropBlur(blurLevel, top, padding) {
