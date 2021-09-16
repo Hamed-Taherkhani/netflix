@@ -2,10 +2,19 @@ const collections = document.querySelectorAll(".collection");
 const moviesMatrix = createMatrix(collections);
 const categories = document.querySelector("#categories");
 const closeBtn = document.querySelector("#close");
+const header = document.querySelector("header");
+const htmlTag = document.querySelector("html");
 const audio = new Audio(
   "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
 );
 audio.volume = 0.1;
+
+/* Scroll handler */
+window.addEventListener("scroll", () => {
+  let top = htmlTag.scrollTop;
+  if (top < 70) header.style.background = "#0000";
+  else header.style.background = "#000";
+});
 
 /* Mouse listener */
 closeBtn.onclick = () => wholeScreenOrNot(27);
@@ -36,6 +45,7 @@ let row = 0,
 window.addEventListener("keyup", moveBetweenMovies);
 function moveBetweenMovies() {
   scaledElement.style.transform = "scale(1)";
+  scaledElement.style.zIndex = "auto";
   let code = this.event.keyCode;
   if (!isFirst && (code === 37 || code === 38 || code === 39 || code === 40)) {
     switch (code) {
@@ -62,6 +72,7 @@ function moveBetweenMovies() {
   if (column < 0) column = 5;
   scaledElement = moviesMatrix[row][column];
   scaledElement.style.transform = "scale(1.1)";
+  scaledElement.style.zIndex = "1";
   scaledElement.scrollIntoView({
     behavior: "smooth",
     block: "center",
