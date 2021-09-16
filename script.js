@@ -1,12 +1,14 @@
 const collections = document.querySelectorAll(".collection");
 const moviesMatrix = createMatrix(collections);
 const categories = document.querySelector("#categories");
+const closeBtn = document.querySelector("#close");
 const audio = new Audio(
   "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
 );
 audio.volume = 0.1;
 
 /* Mouse listener */
+closeBtn.onclick = () => wholeScreenOrNot(27);
 moviesMatrix.forEach((arr) => {
   arr.forEach((value) => {
     value.addEventListener("mouseover", increaseScale);
@@ -53,14 +55,7 @@ function moveBetweenMovies() {
     audio.play();
     setTimeout(() => audio.load(), 500);
   }
-  backdropBlur(10, "0", "13vh");
-  if (code === 27) {
-    backdropBlur(0, "80%", "0");
-    window.scroll({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
+  wholeScreenOrNot(code);
   if (row > 3) row = 0;
   if (row < 0) row = 3;
   if (column > 5) column = 0;
@@ -86,6 +81,17 @@ function backdropBlur(blurLevel, top, padding) {
   categories.style.backdropFilter = `blur(${blurLevel}px)`;
   categories.style.top = top;
   categories.style.padding = padding + " 0 1rem";
+}
+
+function wholeScreenOrNot(code) {
+  backdropBlur(10, "0", "13vh");
+  if (code === 27) {
+    backdropBlur(0, "80%", "0");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 }
 
 function createMatrix(collections) {
