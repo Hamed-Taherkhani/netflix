@@ -1,13 +1,19 @@
-const collections = document.querySelectorAll(".collection");
-const moviesMatrix = createMatrix(collections);
-const categories = document.querySelector("#categories");
-const closeBtn = document.querySelector("#close");
-const header = document.querySelector("header");
-const htmlTag = document.querySelector("html");
-const webpageMode = document.querySelector("#mode");
-const audio = new Audio(
-  "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
-);
+const collections = document.querySelectorAll(".collection"),
+  moviesMatrix = createMatrix(collections),
+  categories = document.querySelector("#categories"),
+  closeBtn = document.querySelector("#close"),
+  header = document.querySelector("header"),
+  htmlTag = document.querySelector("html"),
+  webpageMode = document.querySelector("#mode"),
+  lightMode = webpageMode.children[1],
+  darkMode = webpageMode.children[0],
+  nav = document.querySelector("aside nav"),
+  navIcons = document.querySelectorAll("aside li img"),
+  fade = document.querySelector("#fade"),
+  play = document.querySelector("#play"),
+  audio = new Audio(
+    "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
+  );
 audio.volume = 0.07;
 
 /* Scroll handler */
@@ -26,69 +32,54 @@ moviesMatrix.forEach((arr) => {
     value.addEventListener("mouseout", decreaseScale);
   });
 });
-function increaseScale() {
-  let elementStyle = this.style;
-  scaledElement.style.transform = "scale(1)";
-  elementStyle.transform = "scale(1.1)";
-  elementStyle.zIndex = "1";
-}
 
-function decreaseScale() {
-  let elementStyle = this.style;
-  elementStyle.transform = "scale(1)";
-  elementStyle.zIndex = "auto";
-}
-
-/* key listener */
+/* key listener and change the focus of movie's box in category section */
 let row = 0,
   column = 0,
   scaledElement = moviesMatrix[row][column],
   isFirst = true,
-  flag = false;
+  flag = false,
+  isFull = false;
 window.addEventListener("keyup", moveBetweenMovies);
 function moveBetweenMovies() {
-  scaledElement.style.transform = "scale(1)";
-  scaledElement.style.zIndex = "auto";
+  focusOnMovie(row, column, "1", "auto");
   changeTranslateZAndBlur("-15px", "0", "auto", collections[row]);
   let code = this.event.keyCode;
-  if (!isFirst && (code === 37 || code === 38 || code === 39 || code === 40)) {
+  if (!isFirst)
     switch (code) {
       case 37:
         column--;
+        playAudio();
         break;
       case 38:
         row--;
+        playAudio();
         break;
       case 39:
         column++;
+        playAudio();
         break;
       case 40:
         row++;
+        playAudio();
         break;
     }
-    audio.play();
-    setTimeout(() => audio.load(), 500);
-  }
   wholeScreenOrNot(code);
   if (!flag) {
     changeTranslateZAndBlur("-15px", "3px", "auto", ...collections);
+    isFull = true;
   } else {
     changeTranslateZAndBlur("0", "0", "1", ...collections);
+    isFull = false;
     flag = false;
   }
   if (row > 3) row = 0;
   if (row < 0) row = 3;
   if (column > 5) column = 0;
   if (column < 0) column = 5;
-  scaledElement = moviesMatrix[row][column];
-  scaledElement.style.transform = "scale(1.1)";
-  scaledElement.style.zIndex = "1";
-  scaledElement.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-    inline: "center",
-  });
+  focusOnMovie(row, column, "1.1", "1");
   changeTranslateZAndBlur("0", "0", "1", collections[row]);
+  scaledElement = moviesMatrix[row][column];
   isFirst = false;
 }
 
@@ -99,14 +90,7 @@ window.onkeydown = (event) => {
 };
 
 /* change web mode to dark or light */
-const lightMode = webpageMode.children[1],
-  darkMode = webpageMode.children[0],
-  nav = document.querySelector("aside nav"),
-  navIcons = document.querySelectorAll("aside li img"),
-  fade = document.querySelector("#fade"),
-  play = document.querySelector("#play");
 let isDarkMode = true;
-
 webpageMode.addEventListener("click", () => {
   if (isDarkMode) {
     syncColor("none", "inline-block", "#000000", "#ffffff", 0, "#017eff");
@@ -117,6 +101,7 @@ webpageMode.addEventListener("click", () => {
   }
 });
 
+/* end */
 function syncColor(dDisplay, lDisplay, from, to, brightness, btnColor) {
   darkMode.style.display = dDisplay;
   lightMode.style.display = lDisplay;
@@ -132,7 +117,27 @@ function syncColor(dDisplay, lDisplay, from, to, brightness, btnColor) {
   closeBtn.style.color = "#fff";
 }
 
-/* end */
+function increaseScale() {
+  if (!isFull) {
+    scaledElement.style.transform = "scale(1)";
+    changeScaleZIndex(this, "1.1", "1");
+  }
+}
+
+function decreaseScale() {
+  if (!isFull) changeScaleZIndex(this, "1", "auto");
+}
+
+function changeScaleZIndex(element, scale, zI) {
+  element.style.transform = `scale(${scale})`;
+  element.style.zIndex = zI;
+}
+
+function playAudio() {
+  audio.play();
+  setTimeout(() => audio.load(), 500);
+}
+
 function changeTranslateZAndBlur(z, blur, zIndex, ...arg) {
   arg.forEach((value) => {
     value.style.transform = `translateZ(${z})`;
@@ -140,6 +145,17 @@ function changeTranslateZAndBlur(z, blur, zIndex, ...arg) {
     value.style.zIndex = zIndex;
   });
 }
+
+function focusOnMovie(row, column, scale, zI) {
+  let = element = moviesMatrix[row][column];
+  changeScaleZIndex(element, scale, zI);
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+    inline: "center",
+  });
+}
+
 function backdropBlur(blurLevel, top, padding) {
   categories.style.backdropFilter = `blur(${blurLevel}px)`;
   categories.style.top = top;
@@ -158,13 +174,12 @@ function wholeScreenOrNot(code) {
 }
 
 function createMatrix(collections) {
-  let collectionLength = collections.length,
-    arrTemp = [],
+  let arrTemp = [],
     matrix = [];
-  for (let i = 0; i < collectionLength; i++) {
-    arrTemp.push(...collections[i].children[1].children);
+  collections.forEach((value) => {
+    arrTemp.push(...value.children[1].children);
     matrix.push(arrTemp);
     arrTemp = [];
-  }
+  });
   return matrix;
 }
