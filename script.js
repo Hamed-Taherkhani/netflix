@@ -8,13 +8,13 @@ const webpageMode = document.querySelector("#mode");
 const audio = new Audio(
   "https://ringtonegram.ir/ringtones/RingtoneGram.IR_1613058833_18303.mp3"
 );
-audio.volume = 0.1;
+audio.volume = 0.07;
 
 /* Scroll handler */
 let headerColor = "#000";
 window.addEventListener("scroll", () => {
   let top = htmlTag.scrollTop;
-  if (top < 70) header.style.background = "#0000";
+  if (top < 70) header.style.backgroundColor = "#0000";
   else header.style.background = headerColor;
 });
 
@@ -117,7 +117,7 @@ function syncColor(dDisplay, lDisplay, from, to, brightness, btnColor) {
     (value) => (value.style.filter = `brightness(${brightness})`)
   );
   nav.style.borderRight = `1px solid ${from}25`;
-  fade.style.background = `linear-gradient(90deg, ${to}, #fff0)`;
+  fade.style.background = `linear-gradient(90deg,${to} 10%, #fff0 60%)`;
   play.style.background = btnColor;
   headerColor = to;
   closeBtn.style.color = "#fff";

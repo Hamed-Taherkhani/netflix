@@ -15,8 +15,17 @@ li,
     cursor: pointer;
 }
 
-*:not(li) {
-    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 800ms;
+*:not(li, h3) {
+    transition: 800ms cubic-bezier(0.71, -0.23, 0.29, 1.34);
+}
+
+h2,
+h3,
+p,
+#about-movie,
+.collection,
+main {
+    transition: 25ms;
 }
 
 html {
@@ -29,6 +38,7 @@ header {
     height: 10vh;
     position: fixed;
     z-index: 100;
+    transition: 400ms;
 }
 
 header img {
@@ -95,7 +105,7 @@ main {
 #fade {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #000 -30%, #fff0);
+    background: linear-gradient(90deg, #000 10%, #fff0 60%);
     position: absolute;
     z-index: auto;
 }
