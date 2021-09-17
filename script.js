@@ -43,11 +43,13 @@ function decreaseScale() {
 let row = 0,
   column = 0,
   scaledElement = moviesMatrix[row][column],
-  isFirst = true;
+  isFirst = true,
+  flag = false;
 window.addEventListener("keyup", moveBetweenMovies);
 function moveBetweenMovies() {
   scaledElement.style.transform = "scale(1)";
   scaledElement.style.zIndex = "auto";
+  changeTranslateZAndBlur("-15px", "0", "auto", collections[row]);
   let code = this.event.keyCode;
   if (!isFirst && (code === 37 || code === 38 || code === 39 || code === 40)) {
     switch (code) {
@@ -68,6 +70,12 @@ function moveBetweenMovies() {
     setTimeout(() => audio.load(), 500);
   }
   wholeScreenOrNot(code);
+  if (!flag) {
+    changeTranslateZAndBlur("-15px", "3px", "auto", ...collections);
+  } else {
+    changeTranslateZAndBlur("0", "0", "1", ...collections);
+    flag = false;
+  }
   if (row > 3) row = 0;
   if (row < 0) row = 3;
   if (column > 5) column = 0;
@@ -80,6 +88,7 @@ function moveBetweenMovies() {
     block: "center",
     inline: "center",
   });
+  changeTranslateZAndBlur("0", "0", "1", collections[row]);
   isFirst = false;
 }
 
@@ -124,6 +133,13 @@ function syncColor(dDisplay, lDisplay, from, to, brightness, btnColor) {
 }
 
 /* end */
+function changeTranslateZAndBlur(z, blur, zIndex, ...arg) {
+  arg.forEach((value) => {
+    value.style.transform = `translateZ(${z})`;
+    value.style.filter = `blur(${blur})`;
+    value.style.zIndex = zIndex;
+  });
+}
 function backdropBlur(blurLevel, top, padding) {
   categories.style.backdropFilter = `blur(${blurLevel}px)`;
   categories.style.top = top;
@@ -131,14 +147,14 @@ function backdropBlur(blurLevel, top, padding) {
 }
 
 function wholeScreenOrNot(code) {
-  backdropBlur(10, "0", "13vh");
   if (code === 27) {
     backdropBlur(0, "80%", "0");
     window.scroll({
       top: 0,
       behavior: "smooth",
     });
-  }
+    flag = true;
+  } else backdropBlur(10, "0", "13vh");
 }
 
 function createMatrix(collections) {
